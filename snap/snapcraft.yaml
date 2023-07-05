@@ -1,0 +1,34 @@
+name: sonap
+version: "1.0.0"
+grade: devel
+summary: Sample thing
+description: |
+  Just an F# Sample.
+
+base: core22
+
+confinement: strict
+
+parts:
+  sonap:
+    plugin: dotnet
+    dotnet-build-configuration: Release
+    dotnet-self-contained-runtime-identifier: linux-x64
+    source: ./src
+    build-packages:
+      - dotnet-sdk-7.0
+    stage-packages:
+      - libicu70
+      - libfontconfig
+      - libx11-6
+      - libice6
+      - libsm6
+
+apps:
+  sonap:
+    command: ./Sonap
+    plugs:
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
